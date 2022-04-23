@@ -1,4 +1,0 @@
-przed uruchomieniem programu należy zainstalować kilka rzeczy z wiersza poleceń (upewnij się, że znajdujesz się w folderze ./MyBlog, w którym znajduje się manage.py):
-1.pip install django
-2.pip install install crispy-bootstrap5
-3.pip install psycopg2
