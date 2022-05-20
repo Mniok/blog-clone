@@ -42,3 +42,8 @@ def create_post(request):
         form = PostForm()
 
     return render(request, 'create_post.html', {'form': form})
+
+
+def TOS_page(request):
+    form = PostForm()
+    return render(request, 'tos.html', {'form': form})
