@@ -47,3 +47,18 @@ def create_post(request):
 def TOS_page(request):
     form = PostForm()
     return render(request, 'tos.html', {'form': form})
+
+
+@login_required(login_url="/login")
+def profile(request):
+    posts = Post.objects.all()
+    if request.method == "POST":
+        post_id = request.POST.get("post-id")
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == request.user:
+            post.delete()
+
+    else:
+        form = PostForm()
+
+    return render(request, 'profile.html', {'form': form})

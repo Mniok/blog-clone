@@ -14,7 +14,7 @@
 			{% if user == post.author %}
 				<form method="POST">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Delete</button>
+					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
 				</form>
 			{% endif %}
 		</div>
@@ -22,6 +22,6 @@
 	<div class="card-footer text-muted">{{post.created_at}}</div>
 </div>
 {% empty %}
-<p>No posts yet</p>
+<p>Brak postów</p>
 {% endfor %}
 {% endblock %}

@@ -36,15 +36,16 @@
             <div>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <span class = "navbar-text">Zalogowano jako {{user.username}} | </span>
+                    <a class="nav-link" href="/profile">Zalogowano jako {{user.username}}</a>
+					<span class = "navbar-text"> | </span>
                     <li class = "nav-item">
                         <a class="nav-link" href="/logout">Wyloguj się</a>
-                     </li>
+                    </li>
 
                     {% else %}
                     <li class = "nav-link">
                         <a class="btn btn-primary shadow-none" style="background-color: #F3C44C; border-color: #F3C44C;" href="/signup" type="button">Utwórz konto</a>
-                     </li>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
