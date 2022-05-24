@@ -2,26 +2,28 @@
 {% block title %}Strona Główna{% endblock %}
 
 {% block content %}
-{% for post in posts %}
-<div class="card mt-2">
-	<div class="card-header"><strong>@{{post.author.username}}</strong></div>
-	<div class="card-body d-flex flex-row justify-content-between">
-		<div>
-			<h5 class="card-title">{{post.title}}</h5>
-			<p>{{post.description}}</p>
-		</div>
-		<div>
-			{% if user == post.author %}
+<div class="container mt-auto">
+	{% for post in posts %}
+	<div class="card mt-2">
+		<div class="card-header"><strong>@{{post.author.username}}</strong></div>
+		<div class="card-body d-flex flex-row justify-content-between">
+			<div>
+				<h5 class="card-title">{{post.title}}</h5>
+				<p>{{post.description}}</p>
+			</div>
+			<div>
+				{% if user == post.author %}
 				<form method="POST">
 					{% csrf_token %}
 					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
 				</form>
-			{% endif %}
+				{% endif %}
+			</div>
 		</div>
+		<div class="card-footer text-muted">{{post.created_at}}</div>
 	</div>
-	<div class="card-footer text-muted">{{post.created_at}}</div>
+	{% empty %}
+	<p>Brak postów</p>
+	{% endfor %}
 </div>
-{% empty %}
-<p>Brak postów</p>
-{% endfor %}
 {% endblock %}

@@ -2,9 +2,11 @@
 {% block title %}Utwórz lub edytuj post{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Opublikuj</button>
-</form>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-success">Opublikuj</button>
+    </form>
+</div>
 {% endblock %}

@@ -2,44 +2,51 @@
 {% block title %}Profil{% endblock %}
 
 {% block content %}
-<div class="card mt-2">	<!-- bio -->
-	<div class="card-header"><strong>@{{user.username}}</strong></div>
-	<div class="card-body d-flex flex-row justify-content-between">
-		<div>
-			<p>bio użytkownika</p>
+<div class="container">
+	<div class="card mt-2">
+		<!-- bio -->
+		<div class="card-header"><strong>@{{user.username}}</strong></div>
+		<div class="card-body d-flex flex-row justify-content-between">
+			<div>
+				<p>bio użytkownika</p>
+			</div>
 		</div>
-	</div>
-	<div class="card-footer text-muted">
-		[liczba postów]
-		{% if user != post.author %} <!-- placeholder - zmienić bna jeśli user to nie my -->
+		<div class="card-footer text-muted">
+			[liczba postów]
+			{% if user != post.author %}
+			<!-- placeholder - zmienić bna jeśli user to nie my -->
 			<form method="POST">
 				{% csrf_token %}
-				<button <type="submit" class="btn btn-primary" name="obserwuj" value="{{post.author.id}}">Obserwuj</button>
+				<button <type="submit" class="btn btn-primary" name="obserwuj"
+					value="{{post.author.id}}">Obserwuj</button>
 			</form>
-		{% endif %}
-	</div>
-</div>
-
-{% for post in posts %} <!-- posty -->
-{% if 1 == 1 %} <!-- test + placeholder - zmienić na posty należące do profilu -->
-<div class="card mt-2">
-	<div class="card-header"><strong>@{{post.author.username}}</strong></div>
-	<div class="card-body d-flex flex-row justify-content-between">
-		<div>
-			<h5 class="card-title">{{post.title}}</h5>
-			<p>{{post.description}}</p>
+			{% endif %}
 		</div>
-		<div>
+	</div>
+
+	{% for post in posts %}
+	<!-- posty -->
+	{% if 1 == 1 %}
+	<!-- test + placeholder - zmienić na posty należące do profilu -->
+	<div class="card mt-2">
+		<div class="card-header"><strong>@{{post.author.username}}</strong></div>
+		<div class="card-body d-flex flex-row justify-content-between">
+			<div>
+				<h5 class="card-title">{{post.title}}</h5>
+				<p>{{post.description}}</p>
+			</div>
+			<div>
 				<form method="POST">
 					{% csrf_token %}
 					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
 				</form>
-			{% endif %}
+				{% endif %}
+			</div>
 		</div>
+		<div class="card-footer text-muted">{{post.created_at}}</div>
 	</div>
-	<div class="card-footer text-muted">{{post.created_at}}</div>
+	{% empty %}
+	<p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
+	{% endfor %}
 </div>
-{% empty %}
-<p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
-{% endfor %}
 {% endblock %}
