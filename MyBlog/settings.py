@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'deqif63cs0cv8i',
-        'USER': 'zjdazapwqblmbi',
-        'PASSWORD': '190a60138aafd0382097e8900fdedad86334bbbcb39bbb860efc22e09e1c402e',
-        'HOST': 'ec2-52-18-116-67.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'iodb',
+        'USER': 'django_user',
+        'PASSWORD': 'RQ9jFvUnnsA7Qf4',
+        'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
+        'PORT': '3306'
     }
 }
 
