@@ -2,9 +2,20 @@
 {% block title %}Login{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Register</button>
-</form>
+<div class="container mt-auto">
+	<div class="card border-0 shadow my-5" style="background-color: #F3C44Cbb">
+		<div class="card-body p-5">
+			<form method="post">
+				{% csrf_token %}
+				{{form|crispy}}
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="TOS_accept" id="tos_accept">
+					<label class="form-check-label" for="tos_accept">Akceptuję <a href="/tos">regulamin serwisu</a></label>
+					<!-- na razie wciśnięcie checkboxa nie jest sprawdzane ani zapisywane w bazie danych! -->
+				</div>
+				<button type="submit" class="btn btn-success">Register</button>
+			</form>
+		</div>
+	</div>
+</div>
 {% endblock %}
