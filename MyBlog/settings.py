@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://mojblog.azurewebsites.net']
+
 ROOT_URLCONF = 'MyBlog.urls'
 
 TEMPLATES = [
