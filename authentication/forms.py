@@ -23,4 +23,4 @@ class PostForm(forms.ModelForm):
 class FollowerRequestForm(forms.ModelForm):
     class Meta:
         model = FollowerRequest
-        fields = '__all__'
+        fields = ['account_id1']
