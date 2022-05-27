@@ -11,7 +11,7 @@ from ..models import AuthUser
 # Create your views here.
 @login_required(login_url='/login')
 def followers_page(request):
-    followers = FollowerRequest.objects.all().filter(account=5, request_accepted=1)
+    followers = FollowerRequest.objects.all().filter(account=request.user.id, request_accepted=1)
     return render(request, 'followers.html', {'followers': followers})
 
 # @login_required(login_url='/login')
