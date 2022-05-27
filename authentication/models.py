@@ -6,19 +6,26 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class AccBlogSettings(models.Model):
-    account = models.OneToOneField('AuthUser', models.DO_NOTHING, db_column='ACCOUNT_ID', primary_key=True)  # Field name made lowercase.
-    is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True, null=True)  # Field name made lowercase.
+    account = models.OneToOneField('AuthUser', models.DO_NOTHING, db_column='ACCOUNT_ID',
+                                   primary_key=True)  # Field name made lowercase.
+    is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True,
+                                  null=True)  # Field name made lowercase.
     bio = models.CharField(db_column='BIO', max_length=250, blank=True, null=True)  # Field name made lowercase.
-    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
+    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True,
+                                                 null=True)  # Field name made lowercase.
     profile_picture = models.TextField(db_column='PROFILE_PICTURE', blank=True, null=True)  # Field name made lowercase.
     tos_accepted = models.CharField(db_column='TOS_ACCEPTED', max_length=1)  # Field name made lowercase.
     banned_until = models.DateTimeField(db_column='BANNED_UNTIL', blank=True, null=True)  # Field name made lowercase.
-    banned_permanently = models.CharField(db_column='BANNED_PERMANENTLY', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    window_colour = models.CharField(db_column='WINDOW_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
-    border_colour = models.CharField(db_column='BORDER_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
+    banned_permanently = models.CharField(db_column='BANNED_PERMANENTLY', max_length=1, blank=True,
+                                          null=True)  # Field name made lowercase.
+    window_colour = models.CharField(db_column='WINDOW_COLOUR', max_length=7, blank=True,
+                                     null=True)  # Field name made lowercase.
+    border_colour = models.CharField(db_column='BORDER_COLOUR', max_length=7, blank=True,
+                                     null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -117,7 +124,8 @@ class Category(models.Model):
 
 
 class Comment(models.Model):
-    text_content = models.CharField(db_column='TEXT_CONTENT', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    text_content = models.CharField(db_column='TEXT_CONTENT', max_length=255, blank=True,
+                                    null=True)  # Field name made lowercase.
     date_of_publication = models.DateTimeField(db_column='DATE_OF_PUBLICATION')  # Field name made lowercase.
     account = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='ACCOUNT_ID')  # Field name made lowercase.
     post = models.ForeignKey(AuthenticationPost, models.DO_NOTHING, db_column='POST_ID')  # Field name made lowercase.
@@ -173,9 +181,12 @@ class DjangoSession(models.Model):
 
 
 class FollowerRequest(models.Model):
-    request_accepted = models.CharField(db_column='REQUEST_ACCEPTED', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    account = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='ACCOUNT_ID')  # Field name made lowercase.
-    account_id1 = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='ACCOUNT_ID1')  # Field name made lowercase.
+    request_accepted = models.CharField(db_column='REQUEST_ACCEPTED', max_length=1, blank=True,
+                                        null=True)  # Field name made lowercase.
+    account = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='ACCOUNT_ID',
+                                db_column='ACCOUNT_ID')  # Field name made lowercase.
+    account_id1 = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='ACCOUNT_ID1',
+                                    db_column='ACCOUNT_ID1')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -210,10 +221,23 @@ class OfferCategory(models.Model):
 
 
 class PostSettings(models.Model):
-    post = models.OneToOneField(AuthenticationPost, models.DO_NOTHING, db_column='POST_ID')  # Field name made lowercase.
+    post = models.OneToOneField(AuthenticationPost, models.DO_NOTHING,
+                                db_column='POST_ID')  # Field name made lowercase.
     is_private = models.IntegerField(db_column='IS_PRIVATE', blank=True, null=True)  # Field name made lowercase.
-    comments_blocked = models.IntegerField(db_column='COMMENTS_BLOCKED', blank=True, null=True)  # Field name made lowercase.
+    comments_blocked = models.IntegerField(db_column='COMMENTS_BLOCKED', blank=True,
+                                           null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'post_settings'
+
+
+class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title + "\n" + self.description
