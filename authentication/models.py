@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class AccBlogSettings(models.Model):
@@ -211,9 +212,11 @@ class Likes(models.Model):
         db_table = 'likes'
 
 
+
 class OfferCategory(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='USER_ID')  # Field name made lowercase.
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='CATEGORY_ID')  # Field name made lowercase.
+
 
     class Meta:
         managed = False

@@ -2,7 +2,9 @@ przed uruchomieniem programu należy zainstalować kilka rzeczy z wiersza polece
 1.pip install django
 2.pip install install crispy-bootstrap5
 3.pip install psycopg2
-NOWE: 4.pip install pymysql
-NOWE: 5.pip install mysqlclient
+4.pip install pymysql
+5.pip install mysqlclient
+6.pip install django-ckeditor
+
 
 program uruchamia się komendą python manage.py runserver
