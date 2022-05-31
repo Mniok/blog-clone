@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from ..forms import RegisterForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from ..models import AuthenticationPost
 from ..models import Post
+
 
 # Create your views here.
 def sign_up(request):
