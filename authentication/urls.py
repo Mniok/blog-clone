@@ -10,4 +10,5 @@ urlpatterns =[
     path('create-post', views.view_post.create_post, name='create-post'),
     path('tos', views.view_site_misc.TOS_page, name='tos'),
     path('profile', views.view_user.profile, name='profile'),
+    path('followers', views.view_follower.followers_page, name='followers'),
 ]

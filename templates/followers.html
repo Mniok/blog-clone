@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Strona Główna{% endblock %}
+
+{% block content %}
+<div class="container mt-auto">
+	{% for follower in followers %}
+	<div class="card mt-2">
+		<div class="card-header"><strong>@{{follower.account_id1.username}}</strong></div>
+	</div>
+	{% empty %}
+	<p>Brak postów</p>
+	{% endfor %}
+</div>
+{% endblock %}
