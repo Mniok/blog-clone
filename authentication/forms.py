@@ -19,6 +19,10 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'description']
 
+# class AuthenticationPostForm(forms.ModelForm):
+#     class Meta:
+#         model = AuthenticationPost
+#         fields = ['title', 'description']
 
 class FollowerRequestForm(forms.ModelForm):
     class Meta:

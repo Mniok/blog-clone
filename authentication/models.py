@@ -7,10 +7,10 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
-
+from annoying.fields import AutoOneToOneField
 
 class AccBlogSettings(models.Model):
-    account = models.OneToOneField('AuthUser', models.DO_NOTHING, db_column='ACCOUNT_ID',
+    account = models.OneToOneField(User, models.DO_NOTHING, db_column='ACCOUNT_ID',
                                    primary_key=True)  # Field name made lowercase.
     is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True,
                                   null=True)  # Field name made lowercase.
@@ -112,6 +112,7 @@ class AuthenticationPost(models.Model):
     class Meta:
         managed = False
         db_table = 'authentication_post'
+        ordering = ('-update_at',)
 
 
 class Category(models.Model):
@@ -244,3 +245,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + "\n" + self.description
+

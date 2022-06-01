@@ -14,14 +14,5 @@ def followers_page(request):
     followers = FollowerRequest.objects.all().filter(account=request.user.id, request_accepted=1)
     return render(request, 'followers.html', {'followers': followers})
 
-# @login_required(login_url='/login')
-# def home(request):
-#     posts = AuthenticationPost.objects.all()
-#     if request.method == "POST":
-#         post_id = request.POST.get("post-id")
-#         post = AuthenticationPost.objects.filter(id=post_id).first()
-#         if post and post.author == request.user:
-#             post.delete()
-#     return render(request, 'home.html', {"posts": posts})
 
-#formularz do zdefiniowanaia w forms.py
+
