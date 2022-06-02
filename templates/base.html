@@ -25,6 +25,19 @@
         .navbar-text{
             color: white;
         }
+		
+		
+		.centered-text {
+			text-align: center;
+		}
+		
+		.tos-container{
+			--bs-bg-opacity: .7;
+			border-radius: 45px;
+			margin-top: 40px;
+			margin-bottom: 40px;
+			padding: 30px;
+		}
     </style>
     <title>{% block title %}My Block{% endblock %}</title>
 </head>
@@ -39,6 +52,9 @@
                     {% if user.is_authenticated %}
                     <li class = "nav-item">
                         <a class="nav-link" href="/create-post">Nowy Post</a>
+                    </li>
+                    <li class = "nav-item">
+                        <a class="nav-link" href="/followers">Obserwowani</a>
                     </li>
                     {% endif %}
                 </ul>

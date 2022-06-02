@@ -11,14 +11,6 @@
 				<h5 class="card-title">{{post.title}}</h5>
 				<p>{{post.description}}</p>
 			</div>
-			<div>
-				{% if user == post.author %}
-				<form method="POST">
-					{% csrf_token %}
-					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
-				</form>
-				{% endif %}
-			</div>
 		</div>
 		<div class="card-footer text-muted">{{post.created_at}}</div>
 	</div>
