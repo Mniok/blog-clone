@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from ..models import AuthenticationPost
+from ..models import AuthUser, AuthenticationPost
 from ..models import Post
 from ..models import AccBlogSettings
 from ..models import AuthUser
@@ -28,21 +28,25 @@ def sign_up(request):
 
 
 @login_required(login_url="/login")
-def profile(request):
-    posts_profile = AuthenticationPost.objects.filter(author=request.user.id)
+def profile(request, userid):
+    user = AuthUser.objects.get(id=userid)
+    posts = Post.objects.all()
+    
     if request.method == "POST":
         post_id = request.POST.get("post-id")
-        delete_post = AuthenticationPost.objects.filter(id=post_id)
-        if posts_profile:# and delete_post.author == request.user:
-            delete_post.delete()
-            return redirect('/profile')
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == request.user:
+            post.delete()
+            return render(request, 'profile.html')
+    else:
+        form = PostForm()
+    context= {'user':user, 'posts':posts, 'form':form}
+    return render(request, 'profile.html', context)
 
-    # else:
-    #     posts_profile = PostForm()
-    return render(request, 'profile.html', {'posts_profile': posts_profile})
 
 
-@login_required(login_url="/login")
+
+@login_required(login_url="/login") #edycja profilu - work in progress
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'ckeditor',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iodb_newdatabase_test',
-        'USER': 'django_user_sylwester',
-        'PASSWORD': 'jxxAD7e4HTQZiFe',
+        'NAME': 'iodb_test_mateusz',
+        'USER': 'django_user_mateusz',
+        'PASSWORD': 'fWE2CtmtEUwLLmf',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }
@@ -136,3 +137,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/home'
 
 LOGOUT_REDIRECT_URL = '/login'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+
+        #'extraPlugins': 'autogrow',
+        #'autoGrow_onStartup': True,
+        #'autoGrow_minHeight': 300,
+        #'autoGrow_maxHeight': 900,
+        #'autoGrow_minWidth': 350,
+        #'autoGrow_maxWidth': 1250,
+        'width': 1296,
+        #'width': 'auto',
+        #'resize_maxWidth': '150%',
+    },
+}
