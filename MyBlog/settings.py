@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ev7x@aq2(ls5hlpq4*x=8_evw+(v=932%gp6-_9c6pm=os=tbd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mojblog.azurewebsites.net']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_extensions',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -55,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://mojblog.azurewebsites.net']
 
 ROOT_URLCONF = 'MyBlog.urls'
 
@@ -83,9 +86,9 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iodb_newdatabase_test',
-        'USER': 'django_user_sylwester',
-        'PASSWORD': 'jxxAD7e4HTQZiFe',
+        'NAME': 'iodb',
+        'USER': 'django_user',
+        'PASSWORD': 'RQ9jFvUnnsA7Qf4',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }
