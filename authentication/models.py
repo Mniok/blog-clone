@@ -2,20 +2,29 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+#from annoying.fields import AutoOneToOneField
 
-class Account(models.Model):
-    account = models.OneToOneField('AuthUser', models.DO_NOTHING, db_column='ACCOUNT_ID', primary_key=True)  # Field name made lowercase.
-    is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True, null=True)  # Field name made lowercase.
+class AccBlogSettings(models.Model):
+    account = models.OneToOneField(User, models.DO_NOTHING, db_column='ACCOUNT_ID',
+                                   primary_key=True)  # Field name made lowercase.
+    is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True,
+                                  null=True)  # Field name made lowercase.
     bio = models.CharField(db_column='BIO', max_length=250, blank=True, null=True)  # Field name made lowercase.
-    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
+    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True,
+                                                 null=True)  # Field name made lowercase.
     profile_picture = models.TextField(db_column='PROFILE_PICTURE', blank=True, null=True)  # Field name made lowercase.
     tos_accepted = models.CharField(db_column='TOS_ACCEPTED', max_length=1)  # Field name made lowercase.
     banned_until = models.DateTimeField(db_column='BANNED_UNTIL', blank=True, null=True)  # Field name made lowercase.
-    banned_permanently = models.CharField(db_column='BANNED_PERMANENTLY', max_length=1, blank=True, null=True)  # Field name made lowercase.
+    banned_permanently = models.CharField(db_column='BANNED_PERMANENTLY', max_length=1, blank=True,
+                                          null=True)  # Field name made lowercase.
+    window_colour = models.CharField(db_column='WINDOW_COLOUR', max_length=7, blank=True,
+                                     null=True)  # Field name made lowercase.
+    border_colour = models.CharField(db_column='BORDER_COLOUR', max_length=7, blank=True,
+                                     null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'account'
+        db_table = 'acc_blog_settings'
 
 
 class AuthGroup(models.Model):
@@ -98,22 +107,12 @@ class AuthenticationPost(models.Model):
     class Meta:
         managed = False
         db_table = 'authentication_post'
-
-
-class Blog(models.Model):
-    account = models.OneToOneField(Account, models.DO_NOTHING, db_column='ACCOUNT_ID', primary_key=True)  # Field name made lowercase.
-    window_colour = models.CharField(db_column='WINDOW_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
-    border_colour = models.CharField(db_column='BORDER_COLOUR', max_length=7, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'blog'
+        ordering = ('-update_at',)
 
 
 class Category(models.Model):
-    name = models.CharField(db_column='NAME', primary_key=True, max_length=64)  # Field name made lowercase.
-    account = models.ForeignKey(Account, models.DO_NOTHING, db_column='ACCOUNT_ID')  # Field name made lowercase.
-    account_id2 = models.OneToOneField(Blog, models.DO_NOTHING, db_column='ACCOUNT_ID2')  # Field name made lowercase.
+    category_id = models.IntegerField(db_column='CATEGORY_ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='NAME', max_length=64)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -121,10 +120,11 @@ class Category(models.Model):
 
 
 class Comment(models.Model):
-    text_content = models.CharField(db_column='TEXT_CONTENT', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    text_content = models.CharField(db_column='TEXT_CONTENT', max_length=255, blank=True,
+                                    null=True)  # Field name made lowercase.
     date_of_publication = models.DateTimeField(db_column='DATE_OF_PUBLICATION')  # Field name made lowercase.
-    account = models.ForeignKey(Account, models.DO_NOTHING, db_column='ACCOUNT_ID')  # Field name made lowercase.
-    post = models.OneToOneField('Post', models.DO_NOTHING, db_column='POST_ID', primary_key=True)  # Field name made lowercase.
+    account = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='ACCOUNT_ID')  # Field name made lowercase.
+    post = models.ForeignKey(AuthenticationPost, models.DO_NOTHING, db_column='POST_ID')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -177,35 +177,55 @@ class DjangoSession(models.Model):
 
 
 class FollowerRequest(models.Model):
-    request_accepted = models.CharField(db_column='REQUEST_ACCEPTED', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    account = models.ForeignKey(Account, models.DO_NOTHING, related_name='followed' ,db_column='ACCOUNT_ID')  # Field name made lowercase.
-    account_id1 = models.ForeignKey(Account, models.DO_NOTHING,  related_name='follower', db_column='ACCOUNT_ID1')  # Field name made lowercase.
+    request_accepted = models.CharField(db_column='REQUEST_ACCEPTED', max_length=1, blank=True,
+                                        null=True)  # Field name made lowercase.
+    account = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='ACCOUNT_ID',
+                                db_column='ACCOUNT_ID')  # Field name made lowercase.
+    account_id1 = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='ACCOUNT_ID1',
+                                    db_column='ACCOUNT_ID1')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'follower_request'
 
 
-class Image(models.Model):
-    image = models.TextField(db_column='IMAGE', blank=True, null=True)  # Field name made lowercase.
-    number_in_post = models.IntegerField(db_column='NUMBER_IN_POST', primary_key=True)  # Field name made lowercase.
-    description = models.CharField(db_column='DESCRIPTION', max_length=80, blank=True, null=True)  # Field name made lowercase.
-    post = models.ForeignKey('Post', models.DO_NOTHING, db_column='POST_ID')  # Field name made lowercase.
+class InterestedCategory(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='USER_ID')  # Field name made lowercase.
+    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='CATEGORY_ID')  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'image'
-        unique_together = (('number_in_post', 'post'),)
+        db_table = 'interested_category'
 
 
 class Likes(models.Model):
-    account_account = models.OneToOneField(Account, models.DO_NOTHING, db_column='ACCOUNT_ACCOUNT_ID', primary_key=True)  # Field name made lowercase.
-    post_post = models.ForeignKey('Post', models.DO_NOTHING, db_column='POST_POST_ID')  # Field name made lowercase.
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='USER_ID')  # Field name made lowercase.
+    post = models.ForeignKey(AuthenticationPost, models.DO_NOTHING, db_column='POST_ID')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'likes'
-        unique_together = (('account_account', 'post_post'),)
+
+
+class OfferCategory(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='USER_ID')  # Field name made lowercase.
+    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='CATEGORY_ID')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'offer_category'
+
+
+class PostSettings(models.Model):
+    post = models.OneToOneField(AuthenticationPost, models.DO_NOTHING,
+                                db_column='POST_ID')  # Field name made lowercase.
+    is_private = models.IntegerField(db_column='IS_PRIVATE', blank=True, null=True)  # Field name made lowercase.
+    comments_blocked = models.IntegerField(db_column='COMMENTS_BLOCKED', blank=True,
+                                           null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'post_settings'
 
 
 class Post(models.Model):
@@ -222,4 +242,10 @@ class Post(models.Model):
     class Meta:
         managed = False
         db_table = 'post'
+
+    class Meta:
+        ordering = ('-update_at',)
+
+    def __str__(self):
+        return self.title + "\n" + self.description
 
