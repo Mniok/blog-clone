@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
-from annoying.fields import AutoOneToOneField
+#from annoying.fields import AutoOneToOneField
 
 class AccBlogSettings(models.Model):
     account = models.OneToOneField(User, models.DO_NOTHING, db_column='ACCOUNT_ID',
