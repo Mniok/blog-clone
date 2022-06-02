@@ -12,8 +12,7 @@
 			</div>
 		</div>
 		<div class="card-footer text-muted">
-			[liczba postów]
-			{% if user != post.author %}
+			{% if user.id != profile.user.id %}
 			<!-- placeholder - zmienić bna jeśli user to nie my -->
 			<form method="POST">
 				{% csrf_token %}
@@ -23,11 +22,12 @@
 			{% endif %}
 		</div>
 	</div>
-
-	{% for post in posts %}
-	<!-- posty -->
-	{% if 1 == 1 %}
-	<!-- test + placeholder - zmienić na posty należące do profilu -->
+</div>
+{% for post in posts %}
+<!-- posty -->
+{% if user.id == post.author.id %}
+<!-- test + placeholder - zmienić na posty należące do profilu -->
+<div class="container">
 	<div class="card mt-2">
 		<div class="card-header"><strong>@{{post.author.username}}</strong></div>
 		<div class="card-body d-flex flex-row justify-content-between">
@@ -40,13 +40,15 @@
 					{% csrf_token %}
 					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
 				</form>
-				{% endif %}
 			</div>
 		</div>
 		<div class="card-footer text-muted">{{post.created_at}}</div>
 	</div>
-	{% empty %}
-	<p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
-	{% endfor %}
 </div>
+{% endif %}
+{% empty %}
+<p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
+{% endfor %}
+
+
 {% endblock %}
