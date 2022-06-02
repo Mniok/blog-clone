@@ -22,6 +22,5 @@ def home(request):
 
 
 def TOS_page(request):
-    form = PostForm()
-    return render(request, 'tos.html', {'form': form})
+    return render(request, 'tos.html')
 

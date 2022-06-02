@@ -1,12 +1,70 @@
+<link rel="stylesheet" href="base_styles.css">
 {% extends 'base.html' %}
 {% block title %}Terms Of Service{% endblock %}
 {% load crispy_forms_tags %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base_styles.css' %}" />
+	<link rel="stylesheet" type='text/css' href="base_styles.css" >
 {% block content %}
 <div class="container">
-	<br><br>
-	<h2>Terms Of Service</h2>
-	<hr>
-	<p>Tymczasowy regulamin, do zastąpienia poważniejszym regulaminem napisanym wspólnie z wydziałem zarządzania</p>
-	<p>Nie zabijaj, nie kradnij, nie cudzołóż.</p>
+	<div class="tos-container bg-light bg-gradient">
+		<h2 class="centered-text">Regulamin korzystania ze strony “Mój Blog”</h2>
+		
+		<p class="centered-text">– 1 –</p>
+		
+		<p>
+			1.1 Definicje: <br>
+			– <b>Blog</b> - oznacza stronę „Mój Blog”. <br>
+			– <b>Użytkownik</b> - osoba, która zaakceptowała regulamin i założyła konto na Blogu podając hasło i e-mail, została zweryfikowana, może przeglądać treści, zamieszczać komentarze i własne wpisy.<br>
+			– <b>Autor</b> - osoba publikująca swoje posty na Blogu.<br>
+			– <b>Moderator, Administrator</b> - Użytkownicy posiadający rozszerzone uprawnienia na Blogu.<br>
+			– <b>Publikacja</b> - zamieszczanie treści na Blogu, zarówno postów, jak i komentarzy.<br>
+			– <b>Ban</b> - Forma kary nakładanej na Użytkowników, stosowanej za łamanie regulaminu. Skutkuje brakiem możliwości publikacji na stronie. Może przybrać formę tymczasową lub permanentną. <br>
+		</p>
+		
+		<p class="centered-text">– 2 –</p>
+		
+		<p>
+			2.1 Korzystanie z usług i treści udostępnianych na Blogu jest bezpłatne.<br>
+			2.2 Użytkownik ponosi całkowitą odpowiedzialność za wprowadzane przez siebie publikacje, jak i szkody powstałe w ich wyniku.<br>
+			2.3 Użytkownik w trakcie zakładania konta zapoznaje się i akceptuje niniejszy regulamin, zobowiązany jest do przestrzegania postanowień w nim zawartych.<br>
+		</p>
+		
+		<p class="centered-text">– 3 –</p>
+		
+		<p>
+			3.1 Publikacji może dokonać każdy Użytkownik.<br>
+			3.2 Komentarze mogą być dodawane przez każdego Użytkownika posiadającego uprawnienia do komentowania danego posta. <br>
+			3.3 Uprawnienia dotyczące możliwości komentowania postów zależą od Autorów. W razie zastrzeżenia moderacji wszystkich komentarzy, o publikacji komentarza decyduje Autor komentowanego posta.<br>
+			3.4 Komentarz pojawi się na stronie od razu, z wyjątkiem sytuacji, gdy zostanie zakwalifikowany jako komentarz do moderacji.<br>
+		</p>
+		
+		<p class="centered-text">– 4 –</p>
+		
+		<p>
+			4.1 Krytyka powinna wyrażać się w oparciu o fakty i merytoryczne argumenty.<br>
+			4.2 Użytkownicy i autorzy bloga w trakcie publikacji powinni zachowywać się wedle powszechnie panujących zasad kultury, dobrych manier i innych ogólnie dopuszczalnych zasad społecznych.<br>
+			4.3 Zalecane jest stosowanie w publikacjach logiki i porządkowania treści. Wpisy chaotyczne, niedbale przygotowane mogą zostać uznane za spam lub działanie botów i poddane moderacji lub usunięte.<br>
+		</p>
+		
+		<p class="centered-text">– 5 –</p>
+		
+		<p>
+			5.1 Moderator może zadecydować o usunięciu treści zawierających którekolwiek z poniższych zastrzeżeń:<br>
+			– nadmierne użycie wulgaryzmów;<br>
+			– obrażające Użytkowników lub osoby zewnętrzne;<br>
+			– obrażające jakąkolwiek grupę społeczną, wyznaniową, etniczną;<br>
+			– będące spamem (wielokrotne powtarzanie tej samej lub podobnej treści);<br>
+			– celowo wprowadzające czytelników w błąd;<br>
+			– w sposób bezpośredni naruszające przepisy polskiego prawa;<br>
+			– naruszające powszechnie obowiązujące zasady moralne, prezentujących treści społecznie szkodliwe;<br>
+			– umieszczone przez użytkowników materiałów stanowiących własność i chronione prawem dobra osób trzecich;<br>
+			– stanowiące nachalne treści reklamowe i/lub promocyjne.<br>
+			<br>
+			5.2 Poważne złamanie regulaminu skutkuje nałożeniem Bana.<br>
+			<br>
+			Aktualizacja 26.05.2022 r.
+		</p>
+	</div>
 </div>
 {% endblock %}
