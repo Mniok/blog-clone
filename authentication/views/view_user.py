@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from ..models import AuthenticationPost
+from ..models import AuthUser, AuthenticationPost
 from ..models import Post
 from ..models import AccBlogSettings
 from ..models import AuthUser
@@ -28,18 +28,20 @@ def sign_up(request):
 
 
 @login_required(login_url="/login")
-def profile(request):
+def profile(request, userid):
+    user = AuthUser.objects.get(id=userid)
     posts_profile = AuthenticationPost.objects.filter(author=request.user.id)
     if request.method == "POST":
         post_id = request.POST.get("post-id")
         delete_post = AuthenticationPost.objects.filter(id=post_id)
         if posts_profile:# and delete_post.author == request.user:
             delete_post.delete()
-            return redirect('/profile')
+            return render(request, 'profile.html')
 
     # else:
     #     posts_profile = PostForm()
-    return render(request, 'profile.html', {'posts_profile': posts_profile})
+    context= {'user':user, 'posts_profile':posts_profile}
+    return render(request, 'profile.html', context)
 
 
 @login_required(login_url="/login")
