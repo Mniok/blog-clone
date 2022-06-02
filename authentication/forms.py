@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .models import AuthenticationPost
-from .models import Post, FollowerRequest
+from .models import Post, FollowerRequest, AccBlogSettings
 
 
 class RegisterForm(UserCreationForm):
@@ -40,3 +40,12 @@ class FollowerRequestForm(forms.ModelForm):
         model = FollowerRequest
         fields = ['account_id1']
 
+
+
+
+#edycja profilu
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = AccBlogSettings
+        fields = ["profile_background_colour", "window_colour", "border_colour",
+                  "profile_picture", "bio", "is_private"]

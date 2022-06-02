@@ -11,4 +11,5 @@ urlpatterns =[
     path('tos', views.view_site_misc.TOS_page, name='tos'),
     path('profile', views.view_user.profile, name='profile'),
     path('followers', views.view_follower.followers_page, name='followers'),
+    path('edit-profile', views.view_user.edit_profile, name='edit-profile'),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..forms import RegisterForm, PostForm
+from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from ..models import AuthenticationPost
@@ -40,3 +40,16 @@ def profile(request):
     # else:
     #     posts_profile = PostForm()
     return render(request, 'profile.html', {'posts_profile': posts_profile})
+
+
+@login_required(login_url="/login")
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+        form = EditProfileForm()
+    
+    return render(request, 'profile_edit.html', {"form":form})
