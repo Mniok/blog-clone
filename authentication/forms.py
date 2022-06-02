@@ -45,6 +45,13 @@ class FollowerRequestForm(forms.ModelForm):
 
 #edycja profilu
 class EditProfileForm(forms.ModelForm):
+    is_private = forms.BooleanField(label="Tryb widoczności profilu",
+                        help_text="Tylko obserwujący mogą przeglądac treść prywatnych kont",
+                        required=False) #żeby mogło zostać niezaznaczone - blog nieprywatny
+    bio = forms.CharField(label="Bio", max_length=250,
+                          help_text="Opis bloga widoczny na profilu. Maksymalnie 250 znaków.")
+    
+        
     class Meta:
         model = AccBlogSettings
         fields = ["profile_background_colour", "window_colour", "border_colour",

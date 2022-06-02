@@ -17,9 +17,13 @@
 			<!-- placeholder - zmienić bna jeśli user to nie my -->
 			<form method="POST">
 				{% csrf_token %}
-				<button <type="submit" class="btn btn-primary" name="obserwuj"
+				<button type="submit" class="btn btn-primary" name="obserwuj"
 					value="{{post.author.id}}">Obserwuj</button>
 			</form>
+			<!-- tutaj else ale to jak ifa sie naprawi -->
+			<a href="/edit-profile">
+				<button class="btn btn-warning" name="edytuj_profil">Edytuj profil</button>
+			</a>
 			{% endif %}
 		</div>
 	</div>
