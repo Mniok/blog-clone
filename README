@@ -7,3 +7,4 @@ przed uruchomieniem programu należy zainstalować kilka rzeczy z wiersza polece
 NOWE: 6.pip install django-annoying
 
 program uruchamia się komendą python manage.py runserver
+merge test
