@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iodb_test_mateusz',
-        'USER': 'django_user_mateusz',
-        'PASSWORD': 'fWE2CtmtEUwLLmf',
+        'NAME': 'iodb_test_marian',
+        'USER': 'django_user_marian',
+        'PASSWORD': 'tFqA99JKszcGjrs',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }

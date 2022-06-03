@@ -18,6 +18,7 @@ def sign_up(request):
                                   profile_background_colour="#ffffff",
                                   tos_accepted=1, window_colour="#ffffff",
                                   border_colour="#ffffff")
+                                  #tos_accepted zmieniane z True na 1, żeby zmieściło się w polu 1-znakowym w bazie danych. W tym miejscu może mieć tylko wartość True, bo zaznaczenie jest wymagane do przesłania formularza.
             acc.save()
             return redirect('/home')
     else:

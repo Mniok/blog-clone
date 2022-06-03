@@ -8,12 +8,7 @@
 			<form method="post">
 				{% csrf_token %}
 				{{form|crispy}}
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="TOS_accept" id="tos_accept">
-					<label class="form-check-label" for="tos_accept">Akceptuję <a href="/tos">regulamin serwisu</a></label>
-					<!-- na razie wciśnięcie checkboxa nie jest sprawdzane ani zapisywane w bazie danych! -->
-				</div>
-				<button type="submit" class="btn btn-success">Register</button>
+				<button type="submit" class="btn btn-success">Zarejestruj się</button>
 			</form>
 		</div>
 	</div>
