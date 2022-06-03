@@ -77,14 +77,19 @@ class FollowerRequestForm(forms.ModelForm):
 
 #edycja profilu
 class EditProfileForm(forms.ModelForm):
+    username = forms.CharField(label="Zmień nazwę użytkownika", required=False)
     is_private = forms.BooleanField(label="Profil prywatny",
                         help_text="Tylko obserwujący mogą przeglądac treść prywatnych kont",
                         required=False) #żeby mogło zostać niezaznaczone - blog nieprywatny
     bio = forms.CharField(label="Bio", max_length=250, required=False,
                           help_text="Opis bloga widoczny na profilu. Maksymalnie 250 znaków.")
     profile_picture = forms.ImageField(label="Zdjęcie profilowe", required=False)
+    KATEGORIE_TEMP = (("1", "Kateg. 1"), ("2", "Kateg. 2"),("3", "Kateg. 3"))
+    category_offer = forms.ChoiceField(choices = KATEGORIE_TEMP, required=False)
+    category_interested = forms.ChoiceField(choices = KATEGORIE_TEMP, required=False)
         
     class Meta:
         model = AccBlogSettings
-        fields = ["profile_background_colour", "window_colour", "border_colour",
-                  "profile_picture", "bio", "is_private"]
+        fields = ["username", "profile_background_colour", "window_colour", "border_colour",
+                  "profile_picture", "bio", "is_private",
+                  "category_offer", "category_interested"] #TEMPORARY! robie na 10 minut przed spotkaniem xD potem poprawie
