@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from ..models import AuthUser, AuthenticationPost
+from ..models import User, AuthenticationPost
 from ..models import Post
 from ..models import AccBlogSettings
-from ..models import AuthUser
 
 # Create your views here.
 def sign_up(request):
@@ -30,7 +29,7 @@ def sign_up(request):
 
 @login_required(login_url="/login")
 def profile(request, userid):
-    user = AuthUser.objects.get(id=userid)
+    profile_user = User.objects.get(id=userid)
     posts = Post.objects.all()
     
     if request.method == "POST":
@@ -41,7 +40,7 @@ def profile(request, userid):
             return render(request, 'profile.html')
     else:
         form = PostForm()
-    context= {'user':user, 'posts':posts, 'form':form}
+    context= {'profile_user':profile_user, 'posts':posts, 'form':form}
     return render(request, 'profile.html', context)
 
 

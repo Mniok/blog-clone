@@ -5,20 +5,20 @@
 <div class="container">
 	<div class="card mt-2">
 		<!-- bio -->
-		<div class="card-header"><strong>@{{user.username}}</strong></div>
+		<div class="card-header"><strong>@{{profile_user.username}}</strong></div>
 		<div class="card-body d-flex flex-row justify-content-between">
 			<div>
 				<p>[BIO]</p>
 			</div>
 		</div>
 		<div class="card-footer text-muted">
-			{% if user.id != profile.user.id %}
+			{% if user.id != profile_user.id %}
 			<form method="POST">
 				{% csrf_token %}
 				<button type="submit" class="btn btn-primary" name="obserwuj"
 					value="{{post.author.id}}">Obserwuj</button>
 			</form>
-			<!-- tutaj else zaraz dam tylko test -->
+			{% else %}
 			<a href="/edit-profile">
 				<button class="btn btn-warning" name="edytuj_profil">Edytuj profil</button>
 			</a>
@@ -28,7 +28,7 @@
 </div>
 {% for post in posts %}
 <!-- posty -->
-{% if user.id == post.author.id %}
+{% if profile_user.id == post.author.id %}
 <div class="container">
 	<div class="card mt-2">
 		<div class="card-header"><strong>@{{post.author.username}}</strong></div>
@@ -37,12 +37,14 @@
 				<h5 class="card-title">{{post.title}}</h5>
 				<p>{{post.description | safe}}</p>
 			</div>
+			{% if user.id == profile_user.id %}
 			<div>
 				<form method="POST">
 					{% csrf_token %}
 					<button type="submit" class="btn btn-danger" name="post-id" value="{{post_prof.id}}">Usuń</button>
 				</form>
 			</div>
+			{% endif %}
 		</div>
 		<div class="card-footer text-muted">{{post_prof.created_at}}</div>
 	</div>
