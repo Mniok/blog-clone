@@ -30,21 +30,16 @@ def sign_up(request):
 @login_required(login_url="/login")
 def profile(request, userid):
     profile_user = User.objects.get(id=userid)
-    posts = Post.objects.all()
+    posts = AuthenticationPost.objects.all()
     
     if request.method == "POST":
         post_id = request.POST.get("post-id")
-        post = Post.objects.filter(id=post_id).first()
-        if post and post.author == request.user:
+        post = AuthenticationPost.objects.filter(id=post_id).first()
+        if post and profile_user.id == request.user.id:
             post.delete()
-            return render(request, 'profile.html')
-    else:
-        form = PostForm()
-    context= {'profile_user':profile_user, 'posts':posts, 'form':form}
+
+    context= {'profile_user':profile_user, 'posts':posts}
     return render(request, 'profile.html', context)
-
-
-
 
 @login_required(login_url="/login") #edycja profilu - work in progress
 def edit_profile(request):

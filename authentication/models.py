@@ -226,7 +226,7 @@ class OfferCategory(models.Model):
 
 
 class PostSettings(models.Model):
-    post = models.OneToOneField(AuthenticationPost, models.DO_NOTHING,
+    post = models.OneToOneField(AuthenticationPost, on_delete=models.CASCADE,
                                 db_column='POST_ID')  # Field name made lowercase.
     is_private = models.IntegerField(db_column='IS_PRIVATE', blank=True, null=True)  # Field name made lowercase.
     comments_blocked = models.IntegerField(db_column='COMMENTS_BLOCKED', blank=True,

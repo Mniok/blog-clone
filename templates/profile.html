@@ -41,7 +41,7 @@
 			<div>
 				<form method="POST">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-danger" name="post-id" value="{{post_prof.id}}">Usuń</button>
+					<button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Usuń</button>
 				</form>
 			</div>
 			{% endif %}
@@ -53,6 +53,4 @@
 {% empty %}
 <p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
 {% endfor %}
-
-
 {% endblock %}
