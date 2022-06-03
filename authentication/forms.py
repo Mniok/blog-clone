@@ -1,8 +1,10 @@
 from socket import fromshare
+from PIL import Image ##nowe
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.safestring import mark_safe ##nowe
 from .models import AuthenticationPost
 from .models import Post, FollowerRequest, AccBlogSettings
@@ -75,12 +77,12 @@ class FollowerRequestForm(forms.ModelForm):
 
 #edycja profilu
 class EditProfileForm(forms.ModelForm):
-    is_private = forms.BooleanField(label="Tryb widoczności profilu",
+    is_private = forms.BooleanField(label="Profil prywatny",
                         help_text="Tylko obserwujący mogą przeglądac treść prywatnych kont",
                         required=False) #żeby mogło zostać niezaznaczone - blog nieprywatny
-    bio = forms.CharField(label="Bio", max_length=250,
+    bio = forms.CharField(label="Bio", max_length=250, required=False,
                           help_text="Opis bloga widoczny na profilu. Maksymalnie 250 znaków.")
-    
+    profile_picture = forms.ImageField(label="Zdjęcie profilowe", required=False)
         
     class Meta:
         model = AccBlogSettings

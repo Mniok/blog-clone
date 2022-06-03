@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 
 #from annoying.fields import AutoOneToOneField
 from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField #nowe
 
 
 class AccBlogSettings(models.Model):
@@ -18,8 +19,8 @@ class AccBlogSettings(models.Model):
     is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True,
                                   null=True)  # Field name made lowercase.
     bio = models.CharField(db_column='BIO', max_length=250, blank=True, null=True)  # Field name made lowercase.
-    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True,
-                                                 null=True)  # Field name made lowercase.
+    profile_background_colour = ColorField(db_column='PROFILE_BACKGROUND_COLOUR', format="hex", blank=True,
+                                                 null=True)  # Field name made lowercase. #max długość 7 zmieniona na format="hex"
     profile_picture = models.TextField(db_column='PROFILE_PICTURE', blank=True, null=True)  # Field name made lowercase.
     tos_accepted = models.CharField(db_column='TOS_ACCEPTED', max_length=1)  # Field name made lowercase.
     banned_until = models.DateTimeField(db_column='BANNED_UNTIL', blank=True, null=True)  # Field name made lowercase.
