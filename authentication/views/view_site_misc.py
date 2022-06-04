@@ -15,20 +15,10 @@ def home(request):
     if request.method == "POST":
         choosen = postchooseform["Typ"].value()
         if choosen == "Obserwowani":
-            posts_list = AuthenticationPost.objects.exclude(author_id=request.user.id). \
-                filter(author__ACCOUNT_ID1__account=request.user.id)
+            return redirect('/home/following')
         if choosen == "Wszystkie":
-            posts_list = posts = AuthenticationPost.objects.all()
-    else:
-        #form = PostForm()
-        # posts = AuthenticationPost.objects.exclude(author_id=request.user.id).\
-        # filter(author__ACCOUNT_ID1__account=request.user.id)
-        posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
-    # if request.method == "POST":
-    #     post_id = request.POST.get("post-id")
-    #     post = Post.objects#.filter(id=post_id).first()
-    #     if post and post.author == request.user:
-    #         post.delete()
+            return redirect('/home')
+    posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
     page = request.GET.get('page', 1)
     paginator = Paginator(posts_list, 10)
     try:
@@ -37,10 +27,29 @@ def home(request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-
     return render(request, 'home.html', {"posts": posts,"postchooseform": postchooseform })
 
-
+@login_required(login_url='/login')
+def homeFollowing(request):
+    postchooseform = PostChooseForm(request.POST)
+    if request.method == "POST":
+        choosen = postchooseform["Typ"].value()
+        if choosen == "Obserwowani":
+            return redirect('/home/following')
+        if choosen == "Wszystkie":
+            return redirect('/home')
+    postchooseform = PostChooseForm(initial={'Typ':'Obserwowani'})
+    posts_list = AuthenticationPost.objects.exclude(author_id=request.user.id). \
+        filter(author__ACCOUNT_ID1__account=request.user.id)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts_list, 10)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'home/following.html', {"posts": posts, "postchooseform": postchooseform})
 
 def TOS_page(request):
     return render(request, 'tos.html')
