@@ -36,6 +36,41 @@
 			margin-bottom: 40px;
 			padding: 30px;
 		}
+		
+		
+		:root{
+			--post-preview-max-height: 420px;
+		}
+		
+		.post-preview-container{
+			position: relative;
+			width:100%;
+			max-height: var(--post-preview-max-height);
+			overflow: hidden;
+		}
+		
+		.post-preview-footer{
+		content: "przejdź do pełnej wersji posta aby zobaczyć resztę";
+		display: block;
+		width: 100%;
+		height: 64px;
+		background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(224, 224, 224, .9));
+		position: absolute;
+		top: calc(var(--post-preview-max-height) - 64px); /* od gory nie od dolu zeby nie wyswietlalo sie na krotkich postach! dlatego tez nie klasa bootstrapowa fixed-bottom bo by bylo na kazdym */
+		}
+		
+		.post-preview-footer-textcontent{
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+		}
+		
+		.position-top-right-corner{ /* fix bo button uciekał */
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		}
     </style>
     <title>{% block title %}My Block{% endblock %}</title>
 </head>
