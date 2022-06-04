@@ -36,7 +36,13 @@
 			<div>
 				<h5 class="card-title">{{post.title}}</h5>
 				<p>
-                    {{post.description|safe|truncatechars:200}}
+                    {% if post.description|safe|truncatechars_html:3|length > 180 %}
+                        {{post.description|safe|truncatechars_html:3}}
+                        {{post.description|safe|truncatechars_html:3|length}}
+                    {% else %}
+                        {{post.description|safe|truncatechars_html:20}}
+                        {{post.description|safe|truncatechars_html:20|length}}
+                    {% endif %}
                 </p>
 			</div>
 		</div>
