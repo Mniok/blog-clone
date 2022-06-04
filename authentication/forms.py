@@ -72,18 +72,18 @@ class FollowerRequestForm(forms.ModelForm):
 # Wybór postów
 wybor_postow = (
     ("Wszystkie", "Wszystkie"),
-    ("Obserwowani", "Obserwowani"),
-    ("Najlepsze", "Najlepsze")
+    ("Obserwowani", "Od obserwowanych"),
+    ("Najlepsze", "Najlepsze") #nie powinno być ("Data", "Według daty"), i jeszcze ("Najlepsze", "Według polubień") osobno?
 )
 okres_czasu = (
-    ("day", "Dzień"),
-    ("week", "Tydzień"),
-    ("month", "Miesiąc"),
-    ("year", "Rok"),
-    ("alltime", "Zawsze")
+    ("day", "Z ostatniego dnia"),
+    ("week", "Z ostatniego tygodnia"),
+    ("month", "Z ostatniego miesiąca"),
+    ("year", "Z ostatniego roku"),
+    ("alltime", "Od początku")
 )
 class PostChooseForm(forms.Form):
-    Typ = forms.ChoiceField(label="Wybierz", choices=wybor_postow, required=False,
+    Typ = forms.ChoiceField(label="Wyszukaj posty:", choices=wybor_postow, required=False,
                             widget=forms.Select(attrs={'onchange': 'CzyTop()'}))
     Czas = forms.ChoiceField(label='', choices=okres_czasu, required=False)#.hidden_widget
 
