@@ -69,8 +69,23 @@ class FollowerRequestForm(forms.ModelForm):
         model = FollowerRequest
         fields = ['account_id1']
 
-
-
+# Wybór postów
+wybor_postow = (
+    ("Wszystkie", "Wszystkie"),
+    ("Obserwowani", "Obserwowani"),
+    ("Najlepsze", "Najlepsze")
+)
+okres_czasu = (
+    ("day", "Dzień"),
+    ("week", "Tydzień"),
+    ("month", "Miesiąc"),
+    ("year", "Rok"),
+    ("alltime", "Zawsze")
+)
+class PostChooseForm(forms.Form):
+    Typ = forms.ChoiceField(label="Wybierz", choices=wybor_postow, required=False,
+                            widget=forms.Select(attrs={'onchange': 'CzyTop()'}))
+    Czas = forms.ChoiceField(label='', choices=okres_czasu, required=False)#.hidden_widget
 
 
 
