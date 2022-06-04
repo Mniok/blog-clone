@@ -52,4 +52,25 @@
 	<p>Brak postów</p>
 	{% endfor %}
 </div>
+    {% if posts.has_other_pages %}
+  <ul style=" display: flex; list-style-type: none; margin: auto">
+    {% if posts.has_previous %}
+      <li style="border: black solid;"><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"  style="border: black solid; padding: 1em 3em 1em 3em""><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if users.number == i %}
+        <li  style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em""><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em""><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em"><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 {% endblock %}
