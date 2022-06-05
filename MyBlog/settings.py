@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'iodb_newdatabase_test',
-        'USER': 'django_user_sylwester',
-        'PASSWORD': 'jxxAD7e4HTQZiFe',
+        'USER': 'django_user_marian',
+        'PASSWORD': 'tFqA99JKszcGjrs',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }

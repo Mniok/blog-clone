@@ -41,14 +41,14 @@
 				<div class="post-preview-footer">
 					<b class="post-preview-footer-textcontent">przejdź do pełnej wersji posta aby zobaczyć resztę</b>
 				</div>
-			{% if user.id == profile_user.id %}
-			<div>
-				<form method="POST">
-					{% csrf_token %}
-					<button type="submit" class="btn btn-danger position-top-right-corner" name="post-id" value="{{post.id}}">Usuń</button>
-				</form>
-			</div>
-			{% endif %}
+				{% if user.id == profile_user.id %}
+				<div>
+					<form method="POST">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-danger position-top-right-corner" name="post-id" value="{{post.id}}">Usuń</button>
+					</form>
+				</div>
+				{% endif %}
 			</div>
 		</div>
 		<div class="card-footer text-muted">{{post.created_at}}</div> <!-- przerobić na link do pełnego posta żeby dało się komentować na krótkich postach gdzie nie pojawia się gradient -->
