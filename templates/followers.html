@@ -5,17 +5,19 @@
 <div class="container mt-auto">
 	{% for follower in followers %}
 	<div class="card mt-2">
-		<div class="card-header"><strong>@{{follower.account_id1.username}}</strong>
+		<div class="card-header d-flex flex-row justify-content-between">
+			<a class="username" href="{% url 'profile' follower.account_id1.id %}">{{follower.account_id1.username}}</a>
         <div>
 				<form method="POST">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-danger" name="follower-id" value="{{follower.account_id1.id}}">Usuń</button>
+					<button type="submit" class="btn btn-danger" name="follower-id" value="{{follower.account_id1.id}}">Przestań obserwować</button>
 				</form>
 			</div>
         </div>
 	</div>
 	{% empty %}
-	<p>Brak obserwowanych użytkowników</p>
+	<p>Nie obserwujesz nikogo.</p>
+	<p>Dodaj innych użytkowników do obserwowanych poprzez ich profil.</p>
 	{% endfor %}
 </div>
 {% endblock %}

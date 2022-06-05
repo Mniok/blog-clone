@@ -84,6 +84,16 @@
 			position: absolute;
 			right: 0px;
 		}
+		
+		.username {
+			color:black;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+		.username::before{
+			content: "@";
+		}
     </style>
     <title>{% block title %}My Block{% endblock %}</title>
 </head>
