@@ -83,9 +83,9 @@ okres_czasu = (
     ("alltime", "Od początku")
 )
 class PostChooseForm(forms.Form):
-    Typ = forms.ChoiceField(label="Wyszukaj posty:", choices=wybor_postow, required=False,
+    Typ = forms.ChoiceField(label='', choices=wybor_postow, required=False, #label jest osobno w htmlu jako <label> żeby był w linii z formularzem a nie w kolumnie z tym jednym polem
                             widget=forms.Select(attrs={'onchange': 'CzyTop()'}))
-    Czas = forms.ChoiceField(label='', choices=okres_czasu, required=False)#.hidden_widget
+    Czas = forms.ChoiceField(label='', choices=okres_czasu, required=False) #.hidden_widget
 
 
 

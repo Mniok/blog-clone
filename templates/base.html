@@ -71,6 +71,19 @@
 			top: 0px;
 			right: 0px;
 		}
+		
+		#search-bar > * {
+			display: block;
+			margin-left: 20px;
+			margin-right: 20px;
+			margin-top: 0px;
+			margin-bottom: 0px!important; /* override automatycznego mb-3 na dropdownach */
+		}
+		
+		#search-bar > button {
+			position: absolute;
+			right: 0px;
+		}
     </style>
     <title>{% block title %}My Block{% endblock %}</title>
 </head>

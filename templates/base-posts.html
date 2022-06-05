@@ -3,14 +3,15 @@
 {% block title %}Strona Główna{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="card mt-2">
+    <div class="card">
     <div class="card-body d-flex flex-row justify-content-between">
 
-        <form method="post">
+        <form method="post" class="d-flex flex-row justify-content-between" id="search-bar">
+				<label>Wyszukaj posty:</label> <!-- żeby było w linii z wszystkim a nie w kolumnie z samym 1szym dropdownem psując layout -->
 				{% csrf_token %}
 				{{postchooseform|crispy}}
                 <button type="submit" class="btn btn-success">Szukaj</button>
-			</form>
+		</form>
     </div>
     </div>
     <script>
