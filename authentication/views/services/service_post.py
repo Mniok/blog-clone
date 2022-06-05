@@ -5,8 +5,21 @@ from ...forms import PostChooseForm
 #from ..forms import RegisterForm, AuthenticationPostForm
 #from django.contrib.auth.decorators import login_required
 #from django.contrib.auth import login, logout, authenticate
-from ...models import AuthenticationPost, Post, FollowerRequest, AuthUser
+from ...models import AuthenticationPost, Post, FollowerRequest, AuthUser, PostSettings
 from crispy_forms.helper import FormHelper
+
+
+def createPostService(request, form):
+    post = form.save(commit = False)
+    post.author = request.user
+    post.save()
+    post_set = PostSettings(post_id=post.id, is_private=0, comments_blocked=0)
+    post_set.save()
+    return 1
+
+
+
+
 
 def homeDefaultService(request):
     posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
