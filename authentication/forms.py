@@ -73,7 +73,7 @@ class FollowerRequestForm(forms.ModelForm):
 wybor_postow = (
     ("Wszystkie", "Wszystkie"),
     ("Obserwowani", "Od obserwowanych"),
-    ("Najlepsze", "Najlepsze") #nie powinno być ("Data", "Według daty"), i jeszcze ("Najlepsze", "Według polubień") osobno?
+    ("Najlepsze", "Najlepsze")
 )
 okres_czasu = (
     ("day", "Z ostatniego dnia"),
