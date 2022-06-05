@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}Strona Główna{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="card mt-2">
+    <div class="card-body d-flex flex-row justify-content-between">
+
+        <form method="post">
+				{% csrf_token %}
+				{{postchooseform|crispy}}
+                <button type="submit" class="btn btn-success">Szukaj</button>
+			</form>
+    </div>
+    </div>
+    <script>
+                CzyTop();
+                function CzyTop(){
+                    var select = document.getElementById('id_Typ');
+                    var val = select.options[select.selectedIndex].text;
+                    //var czas = document.getElementById('id_Czas');
+                    if(val == "Najlepsze")
+                    {
+                        document.getElementById('id_Czas').style.visibility = 'visible';
+                    }
+                    else{
+                        document.getElementById('id_Czas').style.visibility = 'hidden';
+                    }
+                }
+        </script>
+<div class="container mt-auto">
+	{% for post in posts %}
+	<div class="card mt-2">
+		<a class="card-header" href="{% url 'profile' post.author.id %}" style="color:black; text-decoration: none;"><strong>@{{post.author.username}}</strong></a>
+		<div class="card-body d-flex flex-row justify-content-between">
+			<div>
+				<h5 class="card-title">{{post.title}}</h5>
+				<p>
+                    {% if post.description|safe|truncatechars_html:3|length > 180 %}
+                        {{post.description|safe|truncatechars_html:3}}
+                    {% else %}
+                        {{post.description|safe|truncatechars_html:20}}
+                    {% endif %}
+                </p>
+			</div>
+		</div>
+		<div class="card-footer text-muted">{{post.created_at}}</div>
+	</div>
+	{% empty %}
+	<p>Brak postów</p>
+	{% endfor %}
+</div>
+    {% if posts.has_other_pages %}
+  <ul style=" display: flex; list-style-type: none; margin: auto">
+    {% if posts.has_previous %}
+      <li style="border: black solid;"><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"  style="border: black solid; padding: 1em 3em 1em 3em""><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if users.number == i %}
+        <li  style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em""><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em""><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li style="border: black solid; margin-left: 2em; padding: 1em 3em 1em 3em"><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock %}

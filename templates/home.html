@@ -1,21 +1,2 @@
-{% extends 'base.html' %}
-{% block title %}Strona Główna{% endblock %}
-
-{% block content %}
-<div class="container mt-auto">
-	{% for post in posts %}
-	<div class="card mt-2">
-		<a class="card-header" href="{% url 'profile' post.author.id %}" style="color:black; text-decoration: none;"><strong>@{{post.author.username}}</strong></a>
-		<div class="card-body d-flex flex-row justify-content-between">
-			<div>
-				<h5 class="card-title">{{post.title}}</h5>
-				<p>{{post.description|safe}}</p>
-			</div>
-		</div>
-		<div class="card-footer text-muted">{{post.created_at}}</div>
-	</div>
-	{% empty %}
-	<p>Brak postów</p>
-	{% endfor %}
-</div>
-{% endblock %}
+{% extends 'base-posts.html' %}
+<!-- nic tu nie ma, patrz do base-posts.html -->
