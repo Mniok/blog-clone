@@ -61,8 +61,8 @@
       <li class="page-item disabled"><a class="page-link" href="">Poprzednia</a></li>
     {% endif %}
     {% for i in posts.paginator.page_range %}
-      {% if users.number == i %}
-        <li  class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% if posts.number == i %}
+        <li  class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
       {% else %}
         <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
       {% endif %}
