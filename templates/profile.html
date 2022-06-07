@@ -28,7 +28,7 @@
 </div>
 {% for post in posts %}
 <!-- posty -->
-{% if profile_user.id == post.author.id %}
+{#{% if profile_user.id == post.author.id %}#}
 <div class="container">
 	<div class="card mt-2">
 		<div class="card-header"><strong class="username">{{post.author.username}}</strong></div>
@@ -54,7 +54,7 @@
 		<div class="card-footer text-muted">{{post.created_at}}</div> <!-- przerobić na link do pełnego posta żeby dało się komentować na krótkich postach gdzie nie pojawia się gradient -->
 	</div>
 </div>
-{% endif %}
+{#{% endif %}#}
 {% empty %}
 <p>Użytkownik nie udostępnił jeszcze żadnych postów</p>
 {% endfor %}

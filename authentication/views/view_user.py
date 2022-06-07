@@ -30,8 +30,9 @@ def sign_up(request):
 @login_required(login_url="/login")
 def profile(request, userid):
     profile_user = User.objects.get(id=userid)
-    posts = AuthenticationPost.objects.all()
-    
+    # posts = AuthenticationPost.objects.all()
+    posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
+
     if request.method == "POST":
         post_id = request.POST.get("post-id")
         post = AuthenticationPost.objects.filter(id=post_id).first()
