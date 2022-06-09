@@ -1,4 +1,3 @@
-django-ckeditor
 asgiref==3.5.1
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
