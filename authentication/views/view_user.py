@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from ..models import AuthenticationPost
+from ..models import User, AuthenticationPost
 from ..models import Post
 from ..models import AccBlogSettings
-from ..models import AuthUser
 
 # Create your views here.
 def sign_up(request):
@@ -18,6 +17,7 @@ def sign_up(request):
                                   profile_background_colour="#ffffff",
                                   tos_accepted=1, window_colour="#ffffff",
                                   border_colour="#ffffff")
+                                  #tos_accepted zmieniane z True na 1, żeby zmieściło się w polu 1-znakowym w bazie danych. W tym miejscu może mieć tylko wartość True, bo zaznaczenie jest wymagane do przesłania formularza.
             acc.save()
             return redirect('/home')
     else:
@@ -28,21 +28,21 @@ def sign_up(request):
 
 
 @login_required(login_url="/login")
-def profile(request):
-    posts_profile = AuthenticationPost.objects.filter(author=request.user.id)
+def profile(request, userid):
+    profile_user = User.objects.get(id=userid)
+    # posts = AuthenticationPost.objects.all()
+    posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
+
     if request.method == "POST":
         post_id = request.POST.get("post-id")
-        delete_post = AuthenticationPost.objects.filter(id=post_id)
-        if posts_profile:# and delete_post.author == request.user:
-            delete_post.delete()
-            return redirect('/profile')
+        post = AuthenticationPost.objects.filter(id=post_id).first()
+        if post and profile_user.id == request.user.id:
+            post.delete()
 
-    # else:
-    #     posts_profile = PostForm()
-    return render(request, 'profile.html', {'posts_profile': posts_profile})
+    context= {'profile_user':profile_user, 'posts':posts}
+    return render(request, 'profile.html', context)
 
-
-@login_required(login_url="/login")
+@login_required(login_url="/login") #edycja profilu - work in progress
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST)

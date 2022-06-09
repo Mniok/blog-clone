@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}Strona Główna{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="card">
+    <div class="card-body d-flex flex-row justify-content-between">
+
+        <form method="post" class="d-flex flex-row justify-content-between" id="search-bar">
+				<label>Wyszukaj posty:</label> <!-- żeby było w linii z wszystkim a nie w kolumnie z samym 1szym dropdownem psując layout -->
+				{% csrf_token %}
+				{{postchooseform|crispy}}
+                <button type="submit" class="btn btn-success">Szukaj</button>
+		</form>
+    </div>
+    </div>
+    <script>
+                CzyTop();
+                function CzyTop(){
+                    var select = document.getElementById('id_Typ');
+                    var val = select.options[select.selectedIndex].text;
+                    //var czas = document.getElementById('id_Czas');
+                    if(val == "Najlepsze")
+                    {
+                        document.getElementById('id_Czas').style.visibility = 'visible';
+                    }
+                    else{
+                        document.getElementById('id_Czas').style.visibility = 'hidden';
+                    }
+                }
+        </script>
+<div class="container mt-auto">
+	{% for post in posts %}
+	<div class="card mt-2">
+		<div class="card-header" >
+			<a class="username" href="{% url 'profile' post.author.id %}">{{post.author.username}}</a>
+		</div>
+		<div class="card-body d-flex flex-row justify-content-between">
+			<div class="post-preview-container">
+				<div>
+					<h5 class="card-title">{{post.title}}</h5>
+					<p>{{post.description | safe}}</p>
+				</div>
+				<div class="post-preview-footer">
+					<b class="post-preview-footer-textcontent">przejdź do pełnej wersji posta aby zobaczyć resztę</b>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer text-muted">{{post.created_at}}</div>
+	</div>
+	{% empty %}
+	<p>Brak postów</p>
+	{% endfor %}
+</div>
+    {% if posts.has_other_pages %}
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if posts.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Poprzednia</a></li>
+    {% else %}
+      <li class="page-item disabled"><a class="page-link" href="">Poprzednia</a></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if posts.number == i %}
+        <li  class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li class="page-item"><a class="page-link" class="page-link" href="?page={{ posts.next_page_number }}">Następna</a></li>
+    {% else %}
+      <li  class="page-item disabled"><a class="page-link" class="page-link" href="">Następna</a></li>
+    {% endif %}
+  </ul>
+        </nav>
+{% endif %}
+{% endblock %}

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
+    'ckeditor',
+    'colorfield',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -137,3 +139,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/home'
 
 LOGOUT_REDIRECT_URL = '/login'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+
+        #'extraPlugins': 'autogrow',
+        #'autoGrow_onStartup': True,
+        #'autoGrow_minHeight': 300,
+        #'autoGrow_maxHeight': 900,
+        #'autoGrow_minWidth': 350,
+        #'autoGrow_maxWidth': 1250,
+        'width': 1296,
+        #'width': 'auto',
+        #'resize_maxWidth': '150%',
+    },
+}

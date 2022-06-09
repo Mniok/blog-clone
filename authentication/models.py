@@ -7,7 +7,11 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
+
 #from annoying.fields import AutoOneToOneField
+from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField #nowe
+
 
 class AccBlogSettings(models.Model):
     account = models.OneToOneField(User, models.DO_NOTHING, db_column='ACCOUNT_ID',
@@ -15,8 +19,8 @@ class AccBlogSettings(models.Model):
     is_private = models.CharField(db_column='IS_PRIVATE', max_length=1, blank=True,
                                   null=True)  # Field name made lowercase.
     bio = models.CharField(db_column='BIO', max_length=250, blank=True, null=True)  # Field name made lowercase.
-    profile_background_colour = models.CharField(db_column='PROFILE_BACKGROUND_COLOUR', max_length=7, blank=True,
-                                                 null=True)  # Field name made lowercase.
+    profile_background_colour = ColorField(db_column='PROFILE_BACKGROUND_COLOUR', format="hex", blank=True,
+                                                 null=True)  # Field name made lowercase. #max długość 7 zmieniona na format="hex"
     profile_picture = models.TextField(db_column='PROFILE_PICTURE', blank=True, null=True)  # Field name made lowercase.
     tos_accepted = models.CharField(db_column='TOS_ACCEPTED', max_length=1)  # Field name made lowercase.
     banned_until = models.DateTimeField(db_column='BANNED_UNTIL', blank=True, null=True)  # Field name made lowercase.
@@ -222,7 +226,7 @@ class OfferCategory(models.Model):
 
 
 class PostSettings(models.Model):
-    post = models.OneToOneField(AuthenticationPost, models.DO_NOTHING,
+    post = models.OneToOneField(AuthenticationPost, on_delete=models.CASCADE,
                                 db_column='POST_ID')  # Field name made lowercase.
     is_private = models.IntegerField(db_column='IS_PRIVATE', blank=True, null=True)  # Field name made lowercase.
     comments_blocked = models.IntegerField(db_column='COMMENTS_BLOCKED', blank=True,
@@ -236,7 +240,8 @@ class PostSettings(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    #description = models.TextField()
+    description = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -245,4 +250,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + "\n" + self.description
-
