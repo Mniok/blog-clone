@@ -8,6 +8,9 @@
             <form method="post">
                 {% csrf_token %}
                 {{form|crispy}}
+                <div class="d-flex links">
+						<a href="{% url 'reset_password' %}" class="ml-2">Nie pamiętam hasła</a>
+					</div>
                 <button type="submit" class="btn btn-success">Login</button>
             </form>
         </div>
