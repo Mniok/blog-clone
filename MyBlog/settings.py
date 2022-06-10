@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-ev7x@aq2(ls5hlpq4*x=8_evw+(v=932%gp6-_9c6pm=os=tbd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mojblog.azurewebsites.net']
 
+CSRF_TRUSTED_ORIGINS = ['https://mojblog.azurewebsites.net']
 
 # Application definition
 
@@ -86,9 +87,9 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iodb_test_ogolny',
-        'USER': 'django_user_test_ogolny',
-        'PASSWORD': 'Atcc9VaDPJMnphs',
+        'NAME': 'iodb',
+        'USER': 'django_user',
+        'PASSWORD': 'RQ9jFvUnnsA7Qf4',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }

@@ -1,4 +1,3 @@
-from socket import fromshare
 from PIL import Image ##nowe
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
