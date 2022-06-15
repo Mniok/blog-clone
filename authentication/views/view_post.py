@@ -27,15 +27,25 @@ def create_post(request):
 
 @login_required(login_url='/login')
 def home(request):
+    page = request.GET.get('page', 1)
     postchooseform = PostChooseForm(request.POST)
+    FilterType = request.GET.get('filter','')
+    FilterDate = request.GET.get('date', '')
+    if(FilterType == ''):
+        FilterType = 'Wszystkie'
+    if (FilterDate == ''):
+        FilterDate = 'day'
     if request.method == "POST":
-        choosen = postchooseform["Typ"].value()
-        if choosen == "Obserwowani":
-            return redirect('/home/following')
-        if choosen == "Wszystkie":
-            return redirect('/home')
-    posts = homeDefaultService(request)
-    return render(request, 'home.html', {"posts": posts,"postchooseform": postchooseform })
+        FilterType = postchooseform["Typ"].value()
+        FilterDate = postchooseform["Czas"].value()
+        page = 1
+        posts = homeDefaultService(request, FilterType, FilterDate, page)
+    else:
+        postchooseform = PostChooseForm(initial={'Typ': FilterType, 'Czas':FilterDate})
+        page = request.GET.get('page', 1)
+        posts = homeDefaultService(request, FilterType, FilterDate, page)
+    return render(request, 'home.html', {"posts": posts,"postchooseform": postchooseform,
+                                         "FilterType":FilterType, "FilterDate":FilterDate, "pageHome":page})
 
 @login_required(login_url='/login')
 def homeFollowing(request):
