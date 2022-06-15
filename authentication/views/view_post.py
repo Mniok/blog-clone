@@ -22,7 +22,11 @@ def create_post(request):
 
     return render(request, 'create_post.html', {'form': form})
 
-
+@login_required(login_url="/login")
+def post_full(request, post_id):
+    post = AuthenticationPost.objects.filter(id=post_id).first()
+    return render(request, 'post_full.html', {'post': post})
+    
 
 
 @login_required(login_url='/login')
