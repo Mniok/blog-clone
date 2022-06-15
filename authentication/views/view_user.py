@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from .services.service_user import ProfileDefaultPosts
 from ..forms import RegisterForm, PostForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
@@ -31,14 +33,26 @@ def sign_up(request):
 def profile(request, userid):
     profile_user = User.objects.get(id=userid)
     # posts = AuthenticationPost.objects.all()
-    posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
-
+    #posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
+    # page = request.GET.get('page', 1)
+    # posts_list = AuthenticationPost.objects.filter(author_id=profile_user.id)
+    # paginator = Paginator(posts_list, 5)
+    # try:
+    #     posts = paginator.page(page)
+    # except PageNotAnInteger:
+    #     posts = paginator.page(1)
+    # except EmptyPage:
+    #     posts = paginator.page(paginator.num_pages)
+    page = request.GET.get('page', 1)
     if request.method == "POST":
         post_id = request.POST.get("post-id")
         post = AuthenticationPost.objects.filter(id=post_id).first()
         if post and profile_user.id == request.user.id:
             post.delete()
+            return redirect('profile', userid=userid)
 
+    else:
+        posts = ProfileDefaultPosts(profile_user, page)
     context= {'profile_user':profile_user, 'posts':posts}
     return render(request, 'profile.html', context)
 

@@ -27,7 +27,6 @@ def create_post(request):
 
 @login_required(login_url='/login')
 def home(request):
-    page = request.GET.get('page', 1)
     postchooseform = PostChooseForm(request.POST)
     FilterType = request.GET.get('filter','')
     FilterDate = request.GET.get('date', '')
