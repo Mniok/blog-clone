@@ -21,10 +21,17 @@ def createPostService(request, form):
 
 
 
-def homeDefaultService(request):
-    posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(posts_list, 10)
+def homeDefaultService(request, FilterType, FilterDate, page):
+    if FilterType == "Obserwowani":
+        posts_list = AuthenticationPost.objects.exclude(author_id=request.user.id). \
+            filter(author__ACCOUNT_ID1__account=request.user.id)
+        # return redirect('/home/following')
+    if FilterType == "Wszystkie" or FilterType == '':
+        posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
+        # return redirect('/home')
+    if FilterType == "Najlepsze":
+        posts_list = AuthenticationPost.objects.all().exclude(author_id=request.user.id)
+    paginator = Paginator(posts_list, 5)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -33,17 +40,3 @@ def homeDefaultService(request):
         posts = paginator.page(paginator.num_pages)
     return posts
 
-
-def homeFollowingService(request):
-    postchooseform = PostChooseForm(initial={'Typ':'Obserwowani'})
-    posts_list = AuthenticationPost.objects.exclude(author_id=request.user.id). \
-        filter(author__ACCOUNT_ID1__account=request.user.id)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(posts_list, 10)
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    return posts
