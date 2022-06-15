@@ -9,4 +9,3 @@ NOWE: 7.pip install django-annoying
 NOWE: 8.pip install django-colorfield #samo dołącza też Pillow (PIL) które też jest potrzebne
 
 program uruchamia się komendą python manage.py runserver
-merge test 2 electric boogaloo
