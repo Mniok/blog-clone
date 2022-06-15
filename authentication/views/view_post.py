@@ -47,14 +47,3 @@ def home(request):
     return render(request, 'home.html', {"posts": posts,"postchooseform": postchooseform,
                                          "FilterType":FilterType, "FilterDate":FilterDate, "pageHome":page})
 
-@login_required(login_url='/login')
-def homeFollowing(request):
-    postchooseform = PostChooseForm(request.POST)
-    if request.method == "POST":
-        choosen = postchooseform["Typ"].value()
-        if choosen == "Obserwowani":
-            return redirect('/home/following')
-        if choosen == "Wszystkie":
-            return redirect('/home')
-    posts = homeFollowingService(request)
-    return render(request, 'home/following.html', {"posts": posts, "postchooseform": postchooseform})
