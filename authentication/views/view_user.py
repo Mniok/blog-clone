@@ -32,7 +32,11 @@ def sign_up(request):
 @login_required(login_url="/login")
 def profile(request, userid):
     profile_user = User.objects.get(id=userid)
-    profile_settings = AccBlogSettings.objects.get(account=profile_user)
+    try:
+        profile_settings = AccBlogSettings.objects.get(account=profile_user)
+    except AccBlogSettings.DoesNotExist:
+        profile_settings = None
+
     # posts = AuthenticationPost.objects.all()
     #posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
     # page = request.GET.get('page', 1)
