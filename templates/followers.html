@@ -20,4 +20,27 @@
 	<p>Dodaj innych użytkowników do obserwowanych poprzez ich profil.</p>
 	{% endfor %}
 </div>
+    {% if followers.has_other_pages %}
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if followers.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ followers.previous_page_number }}">Poprzednia</a></li>
+    {% else %}
+      <li class="page-item disabled"><a class="page-link" href="">Poprzednia</a></li>
+    {% endif %}
+    {% for i in followers.paginator.page_range %}
+      {% if followers.number == i %}
+        <li  class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if followers.has_next %}
+      <li class="page-item"><a class="page-link" class="page-link" href="?page={{ followers.next_page_number }}">Następna</a></li>
+    {% else %}
+      <li  class="page-item disabled"><a class="page-link" class="page-link" href="">Następna</a></li>
+    {% endif %}
+  </ul>
+        </nav>
+{% endif %}
 {% endblock %}
