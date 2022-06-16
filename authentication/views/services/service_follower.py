@@ -5,7 +5,6 @@ from authentication.models import FollowerRequest
 
 def FollowersDefault(request):
     followers_list = FollowerRequest.objects.all().filter(account=request.user.id, request_accepted=1).order_by('account_id1__username')
-    print(followers_list)
     page = request.GET.get('page', 1)
     paginator = Paginator(followers_list, 5)
     try:
