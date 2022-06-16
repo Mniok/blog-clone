@@ -32,6 +32,7 @@ def sign_up(request):
 @login_required(login_url="/login")
 def profile(request, userid):
     profile_user = User.objects.get(id=userid)
+    profile_settings = AccBlogSettings.objects.get(account=profile_user)
     # posts = AuthenticationPost.objects.all()
     #posts = AuthenticationPost.objects.filter(author_id=profile_user.id)
     # page = request.GET.get('page', 1)
@@ -53,7 +54,7 @@ def profile(request, userid):
 
     else:
         posts = ProfileDefaultPosts(profile_user, page)
-    context= {'profile_user':profile_user, 'posts':posts}
+    context= {'profile_user':profile_user, 'posts':posts, 'profile_settings':profile_settings}
     return render(request, 'profile.html', context)
 
 @login_required(login_url="/login") #edycja profilu - work in progress
