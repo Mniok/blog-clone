@@ -44,7 +44,7 @@
 				</div>
 				{% if user.id == profile_user.id %}
 				<div>
-					<form method="POST">
+					<form method="POST" onsubmit="return confirm('Czy na pewno?')">
 						{% csrf_token %}
 						<button type="submit" class="btn btn-danger position-top-right-corner" name="post-id" value="{{post.id}}">Usuń</button>
 					</form>
