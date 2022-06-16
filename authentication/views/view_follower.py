@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .services.service_follower import FollowersDefault
-from ..forms import RegisterForm, PostForm, FollowerRequestForm
+from ..forms import RegisterForm, PostForm, FollowerRequestForm, PostChooseForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from ..models import AuthenticationPost
@@ -13,13 +13,35 @@ from ..models import AuthUser
 # Create your views here.
 @login_required(login_url='/login')
 def followers_page(request):
-    followers = FollowersDefault(request)
+    followerChooseForm = FollowerRequestForm(request.POST)
+    page = request.GET.get('page', 1)
+    FilterType = request.GET.get('filter','')
+    if (FilterType==''):
+        FilterType='received'
+    followers = FollowersDefault(request, page, FilterType)
+    FollowerRequestForm(initial={'zaproszenia': FilterType})
     if request.method == "POST":
-        follower_id = request.POST.get("follower-id")
-        delete_follower = FollowerRequest.objects.filter(account_id1=follower_id)
-        delete_follower.delete()
-        return redirect('/followers')
-    return render(request, 'followers.html', {'followers': followers})
+        if 'zaproszenia' in request.POST:
+            FilterType = followerChooseForm["zaproszenia"].value()
+        if 'follower-id' in request.POST:
+            follower_id = request.POST.get("follower-id")
+            delete_follower = FollowerRequest.objects.filter(account_id1=follower_id, account=request.user.id)
+            delete_follower.delete()
+        if 'follower-id-rec-rej' in request.POST:
+            follower_id = request.POST.get("follower-id-rec-rej")
+            delete_follower = FollowerRequest.objects.filter(account_id1=request.user.id, account=follower_id)
+            delete_follower.delete()
+        if 'follower-id-rec-acc' in request.POST:
+            follower_id = request.POST.get("follower-id-rec-acc")
+            accept_follower = FollowerRequest.objects.filter(account_id1=request.user.id, account=follower_id)
+            accept_follower.update(request_accepted=1)
+        page=1
+        FollowerRequestForm(initial={'zaproszenia': FilterType})
+        followers = FollowersDefault(request, page, FilterType)
+
+    followerChooseForm = FollowerRequestForm(initial={'zaproszenia': FilterType})
+    return render(request, 'followers.html', {'followers': followers, "followerChooseForm":followerChooseForm,
+                                              'FilterType':FilterType, 'pageFollower':page})
 
 
 

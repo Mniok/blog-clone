@@ -63,10 +63,14 @@ class PostForm(forms.ModelForm):
 #         model = AuthenticationPost
 #         fields = ['title', 'description']
 
-class FollowerRequestForm(forms.ModelForm):
-    class Meta:
-        model = FollowerRequest
-        fields = ['account_id1']
+class FollowerRequestForm(forms.Form):
+    typ = (
+        ("received", "Otrzymane Zaproszenia"),
+        ("followed", "Obserwowani"),
+        ("sended", "Wysłane zaproszenia")
+    )
+    zaproszenia = forms.ChoiceField(label='', choices=typ, required=False,
+                        widget=forms.Select(attrs={'onchange': 'form.submit();'}))
 
 # Wybór postów
 wybor_postow = (
