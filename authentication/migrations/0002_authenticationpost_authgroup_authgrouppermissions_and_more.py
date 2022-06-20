@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'authentication_post',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_group',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_group_permissions',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_permission',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -86,7 +86,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user_groups',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user_user_permissions',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'category',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -119,7 +119,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'comment',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -134,7 +134,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_admin_log',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -146,7 +146,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_content_type',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -159,7 +159,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_migrations',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -171,7 +171,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_session',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -182,7 +182,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'follower_request',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -192,7 +192,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'interested_category',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -202,7 +202,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'likes',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -212,7 +212,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'offer_category',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -224,7 +224,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'post_settings',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.AlterField(
@@ -248,7 +248,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'acc_blog_settings',
-                'managed': False,
+                'managed': True,
             },
         ),
     ]
