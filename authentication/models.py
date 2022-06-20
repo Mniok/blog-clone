@@ -108,8 +108,7 @@ class AuthUserUserPermissions(models.Model):
 class AuthenticationPost(models.Model):
     id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    #description = models.TextField()
-    description = RichTextField()
+    description = models.TextField()
     created_at = models.DateTimeField()
     update_at = models.DateTimeField()
     author = models.ForeignKey(AuthUser, models.DO_NOTHING)
