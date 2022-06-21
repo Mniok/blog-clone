@@ -65,9 +65,9 @@ class PostForm(forms.ModelForm):
 
 class FollowerRequestForm(forms.Form):
     typ = (
-        ("received", "Otrzymane Zaproszenia"),
+        ("received", "Otrzymane"),
         ("followed", "Obserwowani"),
-        ("sended", "Wysłane zaproszenia")
+        ("sended", "Wysłane")
     )
     zaproszenia = forms.ChoiceField(label='', choices=typ, required=False,
                         widget=forms.Select(attrs={'onchange': 'form.submit();'}))
