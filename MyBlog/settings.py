@@ -154,3 +154,4 @@ CKEDITOR_CONFIGS = {
         #'resize_maxWidth': '150%',
     },
 }
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
