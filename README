@@ -1,4 +1,23 @@
-przed uruchomieniem programu należy zainstalować kilka rzeczy z wiersza poleceń (upewnij się, że znajdujesz się w folderze ./MyBlog, w którym znajduje się manage.py):
+Projekt "MójBlog" - aplikacja do prowadzenia bloga
+Politechnika Rzeszowska, Informatyka, projekt Inżynieria Oprogramowania i Bazy Danych.
+
+Skład zespołu informatycznego:
+Stopyra Marian - leader, frontend
+Jabłoński Mikołaj - frontend
+Jurek Jakub - backend
+Kowal Sylewster - baza danych
+Makoś Mateusz - backend
+Nguyen Hai Anh - backend
+
+Wykorzystane technologie:
+Środowiska pracy: Git, Trello
+Frontend: HTML+CSS+JS, Bootstrap
+Backend: Python, Django
+Baza danych: MySQL, host Microsoft Azure
+
+
+
+przed uruchomieniem programu należy zainstalować kilka bibliotek z wiersza poleceń (upewnij się, że znajdujesz się w folderze ./MyBlog, w którym znajduje się manage.py):
 1.pip install django
 2.pip install install crispy-bootstrap5
 3.pip install psycopg2
@@ -7,6 +26,11 @@ przed uruchomieniem programu należy zainstalować kilka rzeczy z wiersza polece
 6.pip install django-ckeditor
 7.pip install django-annoying
 8.pip install django-colorfield #samo dołącza też Pillow (PIL) które też jest potrzebne
-NOWE: 9.pip install django_extensions
+9.pip install django_extensions
 
 program uruchamia się komendą python manage.py runserver
+
+program wymaga dostępu do internetu, gdyż baza danych hostowana jest na serwerze Azure.
+
+strona jako host: https://mojblog.azurewebsites.net
+(uwaga: hostowana wersja strony nie wspiera formatowania treści postów i przesyłania obrazów, i zawiera małą ilość treści, przez co wiele funkcjonalności nie jest widocznych.)
