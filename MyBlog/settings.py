@@ -25,9 +25,8 @@ SECRET_KEY = 'django-insecure-ev7x@aq2(ls5hlpq4*x=8_evw+(v=932%gp6-_9c6pm=os=tbd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mojblog.azurewebsites.net']
+ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = ['https://mojblog.azurewebsites.net']
 
 # Application definition
 
@@ -87,9 +86,9 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iodb',
-        'USER': 'django_user',
-        'PASSWORD': 'RQ9jFvUnnsA7Qf4',
+        'NAME': 'iodb_test_ogolny',
+        'USER': 'django_user_test_ogolny',
+        'PASSWORD': 'Atcc9VaDPJMnphs',
         'HOST': 'io-db-2022-pro-myblog.mysql.database.azure.com',
         'PORT': '3306'
     }
@@ -156,11 +155,3 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-#SMTP Configuration
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'myblogservice00@gmail.com'
-EMAIL_HOST_PASSWORD = 'fasijukgufibstey'
